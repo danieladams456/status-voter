@@ -18,7 +18,7 @@ public class StateTransitionTest {
     );
 
     @Test
-    void testStatusInit(){
+    void testStatusInit() {
         StatusVoter voter = new StatusVoter();
         assertThat(voter.getClassification()).isEqualTo(StatusClassification.INITIAL);
         assertThat(voter).hasToString("INITIAL");
@@ -31,7 +31,7 @@ public class StateTransitionTest {
      * Test complexity is O(n^3), but that's fine for a small status set like this.
      */
     @Test
-    void testStatusOnlyMovesUp(){
+    void testStatusOnlyMovesUp() {
         for (int i = 0; i < statusesInOrder.size(); i++)
             for (int j = 0; j < statusesInOrder.size(); j++)
                 for (int k = 0; k < statusesInOrder.size(); k++) {
@@ -40,7 +40,7 @@ public class StateTransitionTest {
                     voter.update(statusesInOrder.get(j));
                     voter.update(statusesInOrder.get(k));
 
-                    var maxIndex = Math.max( Math.max(i,j), k);
+                    var maxIndex = Math.max(Math.max(i, j), k);
                     var expectedClassification = statusesInOrder.get(maxIndex);
                     assertThat(voter.getClassification()).isEqualTo(expectedClassification);
                     assertThat(voter).hasToString(expectedClassification.name());

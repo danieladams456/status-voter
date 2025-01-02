@@ -15,10 +15,12 @@ public enum StatusClassification {
     INTERNAL_ERROR(60);
 
     private final int score;
-    StatusClassification(int score){
+
+    StatusClassification(int score) {
         this.score = score;
     }
-    int getScore(){
+
+    int getScore() {
         return score;
     }
 }
