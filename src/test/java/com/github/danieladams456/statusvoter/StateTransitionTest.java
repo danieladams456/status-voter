@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StatusVoterTest {
+public class StateTransitionTest {
     @Test
     void testStatusInit(){
         StatusVoter voter = new StatusVoter();

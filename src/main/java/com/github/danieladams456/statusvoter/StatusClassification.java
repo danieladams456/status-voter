@@ -1,15 +1,24 @@
 package com.github.danieladams456.statusvoter;
 
 /**
- * For now, using ordinal() value.
- * This depends on order of definitions.  Might change in the future to explicitly specify.
+ * We are using an explicitly assigned score instead of order-dependent ordinal().
+ * Score values are not leaked as visibility is package-private.
+ * Scores should be unique so there is always a winner on merge.
  */
 public enum StatusClassification {
-    INITIAL,
-    SUCCESS,
-    UNCLEAR_ATTRIBUTION_ERROR,
-    CUSTOMER_DATA_ERROR,
-    CUSTOMER_DATA_VALIDATION_ERROR,
-    UNRECOGNIZED_STATUS_ERROR,
-    INTERNAL_ERROR,
+    INITIAL(0),
+    SUCCESS(10),
+    UNCLEAR_ATTRIBUTION_ERROR(20),
+    CUSTOMER_DATA_ERROR(30),
+    CUSTOMER_DATA_VALIDATION_ERROR(40),
+    UNRECOGNIZED_STATUS_ERROR(50),
+    INTERNAL_ERROR(60);
+
+    private final int score;
+    StatusClassification(int score){
+        this.score = score;
+    }
+    int getScore(){
+        return score;
+    }
 }
