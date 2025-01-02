@@ -7,13 +7,18 @@ public class StatusVoter {
         classification = StatusClassification.INITIAL;
     }
 
+    public StatusClassification getClassification(){
+        return classification;
+    }
+
     /**
-     * Temporary implementation with .ordinal()
+     * Updates the current status classification if the incoming classification
+     * has a higher score than the existing classification.
      *
-     * @param newClassification the new, incoming classification to merge with the existing classification.
+     * @param newClassification the new, incoming classification to merge with the existing classification
      */
     public void update(StatusClassification newClassification){
-        if (newClassification.ordinal() > classification.ordinal()){
+        if (newClassification.getScore() > classification.getScore()){
             classification = newClassification;
         }
     }
