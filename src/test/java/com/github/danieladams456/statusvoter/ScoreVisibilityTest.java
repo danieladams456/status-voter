@@ -7,9 +7,10 @@ import java.lang.reflect.Modifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AttributeVisibilityTest {
+public class ScoreVisibilityTest {
     /**
      * We don't want to leak numbers out to consuming applications.
+     *
      * @throws NoSuchMethodException if getScore does not exist
      */
     @Test
