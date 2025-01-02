@@ -7,6 +7,10 @@ public class StatusVoter {
         classification = StatusClassification.INITIAL;
     }
 
+    public StatusClassification getClassification(){
+        return classification;
+    }
+
     /**
      * Updates the current status classification if the incoming classification
      * has a higher score than the existing classification.
