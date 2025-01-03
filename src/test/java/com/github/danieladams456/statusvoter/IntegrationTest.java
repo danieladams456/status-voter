@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IntegrationTest {
     @Test
-    void testSerialize() throws IOException {
-        TestResponseDto data = new TestResponseDto();
+    void testSerializeObject() throws IOException {
+        TestObject data = new TestObject();
         data.setA("test1");
         data.setB("test2");
         ObjectMapper mapper = new ObjectMapper();
@@ -22,10 +22,27 @@ public class IntegrationTest {
                 {"a":"test1","b":"test2","voter":"INITIAL"}""");
     }
 
+    @Test
+    void testSerializeRecord() throws IOException {
+        TestRecord record = new TestRecord("test1", "test2", new StatusVoter());
+        ObjectMapper mapper = new ObjectMapper();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        mapper.writeValue(outputStream, record);
+        assertThat(outputStream.toString()).isEqualTo("""
+                {"a":"test1","b":"test2","voter":"INITIAL"}""");
+    }
+
     @Data
-    private static class TestResponseDto {
+    private static class TestObject {
         private String a;
         private String b;
         private StatusVoter voter = new StatusVoter();
+    }
+
+    private record TestRecord(
+            String a,
+            String b,
+            StatusVoter voter
+    ) {
     }
 }
