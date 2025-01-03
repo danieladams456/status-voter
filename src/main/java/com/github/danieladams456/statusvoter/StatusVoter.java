@@ -1,14 +1,13 @@
 package com.github.danieladams456.statusvoter;
 
+import lombok.Getter;
+
+@Getter
 public class StatusVoter {
     private StatusClassification classification;
 
     public StatusVoter() {
         classification = StatusClassification.INITIAL;
-    }
-
-    public StatusClassification getClassification() {
-        return classification;
     }
 
     /**
