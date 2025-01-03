@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.github.danieladams456'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2'
 
 repositories {
     mavenCentral()
@@ -15,17 +15,17 @@ test {
 
 dependencies {
     // test platform
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation libs.assertj.core
+    testImplementation libs.junit.jupiter
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.1'
+
+    // testing integrations, but don't force consumers to use
+    compileOnly libs.jackson.databind
+    testImplementation libs.jackson.databind
 
     // lombok
-    compileOnly 'org.projectlombok:lombok:1.18.36'
-    annotationProcessor 'org.projectlombok:lombok:1.18.36'
-    testCompileOnly 'org.projectlombok:lombok:1.18.36'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
-
-    // testing integrations, don't force consumers to use
-    compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
-    testImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
 }
