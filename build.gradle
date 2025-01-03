@@ -25,6 +25,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.36'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
 
-    // testing integrations
+    // testing integrations, don't force consumers to use
+    compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
     testImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
 }
