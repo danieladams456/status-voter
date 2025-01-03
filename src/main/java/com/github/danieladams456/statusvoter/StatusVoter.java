@@ -1,14 +1,14 @@
 package com.github.danieladams456.statusvoter;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+
+@Getter
 public class StatusVoter {
     private StatusClassification classification;
 
     public StatusVoter() {
         classification = StatusClassification.INITIAL;
-    }
-
-    public StatusClassification getClassification() {
-        return classification;
     }
 
     /**
@@ -41,6 +41,12 @@ public class StatusVoter {
         }
     }
 
+    /**
+     * toString() is also used for JSON serialization
+     *
+     * @return the string representation of the current StatusClassification
+     */
+    @JsonValue
     @Override
     public String toString() {
         return classification.name();
