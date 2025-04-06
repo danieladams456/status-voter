@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IntegrationTest {
+public class SerializationTest {
     @Test
     void testSerializeObject() throws IOException {
         TestObject data = new TestObject();
@@ -25,11 +25,13 @@ public class IntegrationTest {
     @Test
     void testSerializeRecord() throws IOException {
         TestRecord record = new TestRecord("test1", "test2", new StatusVoter());
+        // test some variety in status
+        record.voter.update(StatusClassification.CUSTOMER_DATA_VALIDATION_ERROR);
         ObjectMapper mapper = new ObjectMapper();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         mapper.writeValue(outputStream, record);
         assertThat(outputStream.toString()).isEqualTo("""
-                {"a":"test1","b":"test2","voter":"INITIAL"}""");
+                {"a":"test1","b":"test2","voter":"CUSTOMER_DATA_VALIDATION_ERROR"}""");
     }
 
     @Data
