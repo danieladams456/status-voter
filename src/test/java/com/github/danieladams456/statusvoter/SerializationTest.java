@@ -26,7 +26,7 @@ public class SerializationTest {
     void testSerializeRecord() throws IOException {
         TestRecord record = new TestRecord("test1", "test2", new StatusVoter());
         // test some variety in status
-        record.voter.update(StatusClassification.CUSTOMER_DATA_VALIDATION_ERROR);
+        record.voter.merge(StatusClassification.CUSTOMER_DATA_VALIDATION_ERROR);
         ObjectMapper mapper = new ObjectMapper();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         mapper.writeValue(outputStream, record);
