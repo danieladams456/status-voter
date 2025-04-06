@@ -36,9 +36,9 @@ public class StateTransitionTest {
             for (int j = 0; j < statusesInOrder.size(); j++)
                 for (int k = 0; k < statusesInOrder.size(); k++) {
                     StatusVoter voter = new StatusVoter();
-                    voter.update(statusesInOrder.get(i));
-                    voter.update(statusesInOrder.get(j));
-                    voter.update(statusesInOrder.get(k));
+                    voter.merge(statusesInOrder.get(i));
+                    voter.merge(statusesInOrder.get(j));
+                    voter.merge(statusesInOrder.get(k));
 
                     var maxIndex = Math.max(Math.max(i, j), k);
                     var expectedClassification = statusesInOrder.get(maxIndex);

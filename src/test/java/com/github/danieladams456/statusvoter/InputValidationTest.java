@@ -14,7 +14,7 @@ public class InputValidationTest {
     @ValueSource(strings = {"invalid", "UNRECOGNIZED_STATUS_ERROR"})
     void stringUpdateMethod(String invalidStatus) {
         StatusVoter voter = new StatusVoter();
-        voter.update(invalidStatus);
+        voter.merge(invalidStatus);
         assertThat(voter.getClassification()).isEqualTo(StatusClassification.UNRECOGNIZED_STATUS_ERROR);
     }
 
@@ -23,7 +23,7 @@ public class InputValidationTest {
     @EnumSource(names = "UNRECOGNIZED_STATUS_ERROR")
     void enumUpdateMethod(StatusClassification invalidStatus) {
         StatusVoter voter = new StatusVoter();
-        voter.update(invalidStatus);
+        voter.merge(invalidStatus);
         assertThat(voter.getClassification()).isEqualTo(StatusClassification.UNRECOGNIZED_STATUS_ERROR);
     }
 }

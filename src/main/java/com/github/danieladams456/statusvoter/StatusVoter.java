@@ -12,12 +12,12 @@ public class StatusVoter {
     }
 
     /**
-     * Updates the current status classification if the incoming classification
-     * has a higher score than the existing classification.
+     * Merges the incoming classification with the existing status classification.
+     * The status classification with the higher score is retained.
      *
      * @param newClassification the new, incoming classification to merge with the existing classification
      */
-    public void update(StatusClassification newClassification) {
+    public void merge(StatusClassification newClassification) {
         if (null == newClassification) {
             classification = StatusClassification.UNRECOGNIZED_STATUS_ERROR;
         } else if (newClassification.getScore() > classification.getScore()) {
@@ -33,11 +33,11 @@ public class StatusVoter {
      *
      * @param newClassification the new, incoming classification to merge with the existing classification
      */
-    public void update(String newClassification) {
+    public void merge(String newClassification) {
         try {
-            update(StatusClassification.valueOf(newClassification));
+            merge(StatusClassification.valueOf(newClassification));
         } catch (IllegalArgumentException | NullPointerException e) {
-            update(StatusClassification.UNRECOGNIZED_STATUS_ERROR);
+            merge(StatusClassification.UNRECOGNIZED_STATUS_ERROR);
         }
     }
 
