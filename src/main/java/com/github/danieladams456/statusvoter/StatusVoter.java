@@ -19,7 +19,7 @@ public class StatusVoter {
      */
     public void merge(StatusClassification newClassification) {
         if (null == newClassification) {
-            classification = StatusClassification.UNRECOGNIZED_STATUS_ERROR;
+            classification = StatusClassification.INTERNAL_STATUS_MERGE_ERROR;
         } else if (newClassification.getScore() > classification.getScore()) {
             classification = newClassification;
         }
@@ -27,7 +27,7 @@ public class StatusVoter {
 
     /**
      * Variety that takes an incoming string and hands off to the main merging logic.
-     * Can result in UNRECOGNIZED_STATUS_ERROR if not a valid classification.
+     * Can result in INTERNAL_STATUS_MERGE_ERROR if not a valid classification.
      * <p>
      * I would rather have all null handling in the enum method, but .valueOf() throws NPE first.
      *
@@ -37,7 +37,7 @@ public class StatusVoter {
         try {
             merge(StatusClassification.valueOf(newClassification));
         } catch (IllegalArgumentException | NullPointerException e) {
-            merge(StatusClassification.UNRECOGNIZED_STATUS_ERROR);
+            merge(StatusClassification.INTERNAL_STATUS_MERGE_ERROR);
         }
     }
 

@@ -11,19 +11,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InputValidationTest {
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"invalid", "UNRECOGNIZED_STATUS_ERROR"})
+    @ValueSource(strings = {"invalid", "INTERNAL_STATUS_MERGE_ERROR"})
     void stringUpdateMethod(String invalidStatus) {
         StatusVoter voter = new StatusVoter();
         voter.merge(invalidStatus);
-        assertThat(voter.getClassification()).isEqualTo(StatusClassification.UNRECOGNIZED_STATUS_ERROR);
+        assertThat(voter.getClassification()).isEqualTo(StatusClassification.INTERNAL_STATUS_MERGE_ERROR);
     }
 
     @ParameterizedTest
     @NullSource
-    @EnumSource(names = "UNRECOGNIZED_STATUS_ERROR")
+    @EnumSource(names = "INTERNAL_STATUS_MERGE_ERROR")
     void enumUpdateMethod(StatusClassification invalidStatus) {
         StatusVoter voter = new StatusVoter();
         voter.merge(invalidStatus);
-        assertThat(voter.getClassification()).isEqualTo(StatusClassification.UNRECOGNIZED_STATUS_ERROR);
+        assertThat(voter.getClassification()).isEqualTo(StatusClassification.INTERNAL_STATUS_MERGE_ERROR);
     }
 }
