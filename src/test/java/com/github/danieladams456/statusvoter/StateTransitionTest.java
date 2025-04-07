@@ -13,7 +13,7 @@ public class StateTransitionTest {
             StatusClassification.UNCLEAR_ATTRIBUTION_ERROR,
             StatusClassification.CUSTOMER_DATA_ERROR,
             StatusClassification.CUSTOMER_DATA_VALIDATION_ERROR,
-            StatusClassification.UNRECOGNIZED_STATUS_ERROR,
+            StatusClassification.INTERNAL_STATUS_MERGE_ERROR,
             StatusClassification.INTERNAL_ERROR
     );
 
