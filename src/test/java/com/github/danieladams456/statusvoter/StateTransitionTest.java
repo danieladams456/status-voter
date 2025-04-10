@@ -5,20 +5,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
+import static com.github.danieladams456.statusvoter.TestData.STATUSES_IN_ORDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StateTransitionTest {
-    private static final List<StatusClassification> statusesInOrder = List.of(
-            StatusClassification.INITIAL,
-            StatusClassification.SUCCESS,
-            StatusClassification.UNCLEAR_ATTRIBUTION_ERROR,
-            StatusClassification.CUSTOMER_DATA_ERROR,
-            StatusClassification.CUSTOMER_DATA_VALIDATION_ERROR,
-            StatusClassification.INTERNAL_STATUS_MERGE_ERROR,
-            StatusClassification.INTERNAL_ERROR
-    );
 
     @Test
     void testStatusInit() {
@@ -35,16 +25,16 @@ public class StateTransitionTest {
      */
     @Test
     void testStatusOnlyMovesUp() {
-        for (int i = 0; i < statusesInOrder.size(); i++)
-            for (int j = 0; j < statusesInOrder.size(); j++)
-                for (int k = 0; k < statusesInOrder.size(); k++) {
+        for (int i = 0; i < STATUSES_IN_ORDER.size(); i++)
+            for (int j = 0; j < STATUSES_IN_ORDER.size(); j++)
+                for (int k = 0; k < STATUSES_IN_ORDER.size(); k++) {
                     StatusVoter voter = new StatusVoter();
-                    voter.merge(statusesInOrder.get(i));
-                    voter.merge(statusesInOrder.get(j));
-                    voter.merge(statusesInOrder.get(k));
+                    voter.merge(STATUSES_IN_ORDER.get(i));
+                    voter.merge(STATUSES_IN_ORDER.get(j));
+                    voter.merge(STATUSES_IN_ORDER.get(k));
 
                     var maxIndex = Math.max(Math.max(i, j), k);
-                    var expectedClassification = statusesInOrder.get(maxIndex);
+                    var expectedClassification = STATUSES_IN_ORDER.get(maxIndex);
                     assertThat(voter.getClassification()).isEqualTo(expectedClassification);
                     assertThat(voter).hasToString(expectedClassification.name());
                 }
