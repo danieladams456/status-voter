@@ -1,6 +1,9 @@
 package com.github.danieladams456.statusvoter;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -45,5 +48,27 @@ public class StateTransitionTest {
                     assertThat(voter.getClassification()).isEqualTo(expectedClassification);
                     assertThat(voter).hasToString(expectedClassification.name());
                 }
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"invalid", "INTERNAL_STATUS_MERGE_ERROR"})
+    void testInvalidStatusDoesNotRevertHigherPriorityStatus_String(String invalidStatus) {
+        StatusVoter voter = new StatusVoter();
+        // higher score + severity
+        voter.merge(StatusClassification.INTERNAL_ERROR);
+        // lower score + severity
+        voter.merge(invalidStatus);
+        assertThat(voter.getClassification()).isEqualTo(StatusClassification.INTERNAL_ERROR);
+    }
+
+    @Test
+    void testInvalidStatusDoesNotRevertHigherPriorityStatus_Enum() {
+        StatusVoter voter = new StatusVoter();
+        // higher score + severity
+        voter.merge(StatusClassification.INTERNAL_ERROR);
+        // lower score + severity
+        voter.merge((StatusClassification) null);
+        assertThat(voter.getClassification()).isEqualTo(StatusClassification.INTERNAL_ERROR);
     }
 }

@@ -18,9 +18,12 @@ public class StatusVoter {
      * @param newClassification the new, incoming classification to merge with the existing classification
      */
     public void merge(StatusClassification newClassification) {
+        // null value is reset to a legitimate non-null value
         if (null == newClassification) {
-            classification = StatusClassification.INTERNAL_STATUS_MERGE_ERROR;
-        } else if (newClassification.getScore() > classification.getScore()) {
+            newClassification = StatusClassification.INTERNAL_STATUS_MERGE_ERROR;
+        }
+
+        if (newClassification.getScore() > classification.getScore()) {
             classification = newClassification;
         }
     }
