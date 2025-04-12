@@ -14,10 +14,14 @@ public class StatusVoter {
     /**
      * Merges the incoming classification with the existing status classification.
      * The status classification with the higher score is retained.
+     * <p>
+     * This method is marked as synchronized to avoid concurrency bugs.
+     * It is not a huge penalty to mark the whole method as such since it
+     * is fast in comparison to the work this status is tracking.
      *
      * @param newClassification the new, incoming classification to merge with the existing classification
      */
-    public void merge(StatusClassification newClassification) {
+    public synchronized void merge(StatusClassification newClassification) {
         // null value is reset to a legitimate non-null value
         if (null == newClassification) {
             newClassification = StatusClassification.INTERNAL_STATUS_MERGE_ERROR;
