@@ -1,5 +1,5 @@
 [versions]
-assertj = '3.27.1'
+assertj = '3.27.7'
 jackson = '2.18.2'
 junit = '5.10.0'
 lombok = '1.18.36'
